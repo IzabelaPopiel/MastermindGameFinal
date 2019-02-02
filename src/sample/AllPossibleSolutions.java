@@ -55,7 +55,7 @@ class AllPossibleSolutions {
     // Driver code
     public static void main(String args[]) {
         AllPossibleSolutions obj = new AllPossibleSolutions();
-        Object[] elements = new Object[]{Colour.YELLOW, Colour.BLACK, Colour.WHITE, Colour.BLUE, Colour.RED, Colour.GREEN};
+        Object[] elements = new Object[]{Colour.YELLOW, Colour.ORANGE, Colour.PURPLE, Colour.BLUE, Colour.RED, Colour.GREEN};
         System.out.println(Arrays.toString(elements));
 
         obj.heapPermutation(elements, elements.length, 4);

@@ -9,7 +9,7 @@ public class Tester {
     public static void main(String[] args) {
 
         AllPossibleSolutions possibleSolutions = new AllPossibleSolutions();
-        Object[] elements = new Object[]{Colour.YELLOW, Colour.BLACK, Colour.WHITE, Colour.BLUE, Colour.RED, Colour.GREEN};
+        Object[] elements = new Object[]{Colour.YELLOW, Colour.ORANGE, Colour.PURPLE, Colour.BLUE, Colour.RED, Colour.GREEN};
         possibleSolutions.heapPermutation(elements, elements.length, 4);
 
         System.out.println(possibleSolutions.getSolutions().size());
@@ -28,7 +28,7 @@ public class Tester {
 
         List<Object> wrongColours = new ArrayList<>();
 
-        wrongColours.add(Colour.BLACK);
+        wrongColours.add(Colour.ORANGE);
 
        // possibleSolutions.update(mustColours, mustPosition, wrongColours);
         System.out.println(possibleSolutions.getSolutions().size());
