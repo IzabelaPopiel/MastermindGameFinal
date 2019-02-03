@@ -16,12 +16,9 @@ class AllPossibleSolutions {
     public void printArr(Object elements[], int n) {
         List<Object> newElement = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            // System.out.print(elements[i] + " ");
             newElement.add(elements[i]);
         }
-//        System.out.println();
         solutions.add(newElement);
-
     }
 
     //Generating permutation using Heap Algorithm
@@ -53,23 +50,22 @@ class AllPossibleSolutions {
     }
 
     // Driver code
-    public static void main(String args[]) {
-        AllPossibleSolutions obj = new AllPossibleSolutions();
-        Object[] elements = new Object[]{Colour.YELLOW, Colour.ORANGE, Colour.PURPLE, Colour.BLUE, Colour.RED, Colour.GREEN};
-        System.out.println(Arrays.toString(elements));
-
-        obj.heapPermutation(elements, elements.length, 4);
-        System.out.println(obj.getSolutions().size());
-
-        System.out.println(obj.getSolutions());
-    }
+//    public static void main(String args[]) {
+//        AllPossibleSolutions obj = new AllPossibleSolutions();
+//        Object[] elements = new Object[]{Colour.YELLOW, Colour.ORANGE, Colour.PURPLE, Colour.BLUE, Colour.RED, Colour.GREEN};
+//        System.out.println(Arrays.toString(elements));
+//
+//        obj.heapPermutation(elements, elements.length, 4);
+//        System.out.println(obj.getSolutions().size());
+//
+//        System.out.println(obj.getSolutions());
+//    }
 
     public void update(List<Object> rightColours, Object[] rightPositions, Object[] wrongPositions, List<Object> wrongColours, Object[] randomGuess) {
 
         for (int i = 0; i < rightColours.size(); i++) {
             Object c1 = rightColours.get(i);
             solutions.removeIf((List<Object> o) -> !o.contains(c1));
-
         }
 
         for (int i = 0; i < wrongColours.size(); i++) {

@@ -7,19 +7,35 @@ import javafx.scene.control.Label;
 
 import java.util.*;
 
-public class Controller {
+public class HumanPlayer {
 
     private HashMap<String, Button[]> btnMap = new HashMap<>();
+    private HashMap<Integer, Button> hiddenBtnMap = new HashMap<>();
     private int attemptsNumber;
     private AllPossibleSolutions possibleSolutions;
-    private Colour[] colours = new Colour[]{Colour.RED, Colour.ORANGE, Colour.YELLOW, Colour.GREEN, Colour.BLUE, Colour.PURPLE};
+    private Colour[] colours = Colour.class.getEnumConstants();
     private Object[] answerLine;
 
     @FXML
-    private Label lblAnswers;
+    private Button btnCheck;
 
     @FXML
-    private Button btnGuess;
+    private Button btnHelp;
+
+    @FXML
+    private Button btnAgain;
+
+    @FXML
+    private Button btnHid1;
+
+    @FXML
+    private Button btnHid2;
+
+    @FXML
+    private Button btnHid3;
+
+    @FXML
+    private Button btnHid4;
 
     @FXML
     private Button btnAns1;
@@ -36,6 +52,10 @@ public class Controller {
     @FXML
     private Button btnAns4;
     private Colour btnAns4Col;
+
+
+    @FXML
+    private Label lblAnswers;
 
     @FXML
     private Button btnAtt11;
@@ -60,66 +80,6 @@ public class Controller {
 
     @FXML
     private Button btnFeedBack14;
-
-    @FXML
-    private Button btnFeedBack21;
-
-    @FXML
-    private Button btnFeedBack23;
-
-    @FXML
-    private Button btnFeedBack22;
-
-    @FXML
-    private Button btnFeedBack24;
-
-    @FXML
-    private Button btnFeedBack31;
-
-    @FXML
-    private Button btnFeedBack33;
-
-    @FXML
-    private Button btnFeedBack32;
-
-    @FXML
-    private Button btnFeedBack34;
-
-    @FXML
-    private Button btnFeedBack41;
-
-    @FXML
-    private Button btnFeedBack43;
-
-    @FXML
-    private Button btnFeedBack42;
-
-    @FXML
-    private Button btnFeedBack44;
-
-    @FXML
-    private Button btnFeedBack51;
-
-    @FXML
-    private Button btnFeedBack53;
-
-    @FXML
-    private Button btnFeedBack52;
-
-    @FXML
-    private Button btnFeedBack54;
-
-    @FXML
-    private Button btnFeedBack61;
-
-    @FXML
-    private Button btnFeedBack63;
-
-    @FXML
-    private Button btnFeedBack62;
-
-    @FXML
-    private Button btnFeedBack64;
 
     @FXML
     private Button btnAtt21;
@@ -182,16 +142,112 @@ public class Controller {
     private Button btnAtt64;
 
     @FXML
-    private Button btnHelp;
+    private Button btnFeedBack21;
 
     @FXML
-    private Button btnAgain;
+    private Button btnFeedBack23;
 
+    @FXML
+    private Button btnFeedBack22;
+
+    @FXML
+    private Button btnFeedBack24;
+
+    @FXML
+    private Button btnFeedBack31;
+
+    @FXML
+    private Button btnFeedBack33;
+
+    @FXML
+    private Button btnFeedBack32;
+
+    @FXML
+    private Button btnFeedBack34;
+
+    @FXML
+    private Button btnFeedBack41;
+
+    @FXML
+    private Button btnFeedBack43;
+
+    @FXML
+    private Button btnFeedBack42;
+
+    @FXML
+    private Button btnFeedBack44;
+
+    @FXML
+    private Button btnFeedBack51;
+
+    @FXML
+    private Button btnFeedBack53;
+
+    @FXML
+    private Button btnFeedBack52;
+
+    @FXML
+    private Button btnFeedBack54;
+
+    @FXML
+    private Button btnFeedBack61;
+
+    @FXML
+    private Button btnFeedBack63;
+
+    @FXML
+    private Button btnFeedBack62;
+
+    @FXML
+    private Button btnFeedBack64;
+
+
+    public Colour getBtnAns1Col() {
+        return btnAns1Col;
+    }
+
+    public void setBtnAns1Col(Colour btnAns1Col) {
+        this.btnAns1Col = btnAns1Col;
+    }
+
+    public Colour getBtnAns2Col() {
+        return btnAns2Col;
+    }
+
+    public void setBtnAns2Col(Colour btnAns2Col) {
+        this.btnAns2Col = btnAns2Col;
+    }
+
+    public Colour getBtnAns3Col() {
+        return btnAns3Col;
+    }
+
+    public void setBtnAns3Col(Colour btnAns3Col) {
+        this.btnAns3Col = btnAns3Col;
+    }
+
+    public Colour getBtnAns4Col() {
+        return btnAns4Col;
+    }
+
+    public void setBtnAns4Col(Colour btnAns4Col) {
+        this.btnAns4Col = btnAns4Col;
+    }
 
     public void initialize() {
         possibleSolutions = new AllPossibleSolutions();
         possibleSolutions.heapPermutation(colours, colours.length, 4);
         attemptsNumber = 0;
+
+        btnAns1.setMouseTransparent(false);
+        btnAns2.setMouseTransparent(false);
+        btnAns3.setMouseTransparent(false);
+        btnAns4.setMouseTransparent(false);
+
+        hiddenBtnMap.put(1, btnHid1);
+        hiddenBtnMap.put(2, btnHid2);
+        hiddenBtnMap.put(3, btnHid3);
+        hiddenBtnMap.put(4, btnHid4);
 
         btnMap.put("Attempt1", new Button[]{btnAtt11, btnAtt12, btnAtt13, btnAtt14});
         btnMap.put("FeedBack1", new Button[]{btnFeedBack11, btnFeedBack12, btnFeedBack13, btnFeedBack14});
@@ -206,46 +262,26 @@ public class Controller {
         btnMap.put("Attempt6", new Button[]{btnAtt61, btnAtt62, btnAtt63, btnAtt64});
         btnMap.put("FeedBack6", new Button[]{btnFeedBack61, btnFeedBack62, btnFeedBack63, btnFeedBack64});
 
+        btnHid1.setMouseTransparent(true);
+        btnHid2.setMouseTransparent(true);
+        btnHid3.setMouseTransparent(true);
+        btnHid4.setMouseTransparent(true);
+
+
         for (Map.Entry<String, Button[]> entry : btnMap.entrySet()) {
             for (Button button : entry.getValue()) {
-                button.setStyle("-fx-background-color: transparent;");
-                button.setMouseTransparent(false);
+                button.setMouseTransparent(true);
+                button.setStyle("-fx-background-color: transparent");
             }
         }
 
-        lblAnswers.setVisible(false);
-    }
+        answerLine = possibleSolutions.randomGuess();
+        System.out.println(Arrays.asList(answerLine));
 
-    public void setBtnAns1Col(Colour btnAns1Col) {
-        this.btnAns1Col = btnAns1Col;
-    }
+        for (int i = 1; i <= hiddenBtnMap.size(); i++) {
+            hiddenBtnMap.get(i).setStyle("-fx-background-color: #939393");
 
-    public void setBtnAns2Col(Colour btnAns2Col) {
-        this.btnAns2Col = btnAns2Col;
-    }
-
-    public void setBtnAns3Col(Colour btnAns3Col) {
-        this.btnAns3Col = btnAns3Col;
-    }
-
-    public void setBtnAns4Col(Colour btnAns4Col) {
-        this.btnAns4Col = btnAns4Col;
-    }
-
-    public Colour getBtnAns1Col() {
-        return btnAns1Col;
-    }
-
-    public Colour getBtnAns2Col() {
-        return btnAns2Col;
-    }
-
-    public Colour getBtnAns3Col() {
-        return btnAns3Col;
-    }
-
-    public Colour getBtnAns4Col() {
-        return btnAns4Col;
+        }
     }
 
     @FXML
@@ -254,9 +290,7 @@ public class Controller {
     }
 
     @FXML
-    void btnAns2Pressed(ActionEvent event) {
-        setBtnAns2Col(changeColour(btnAns2, btnAns2Col));
-    }
+    void btnAns2Pressed(ActionEvent event) { setBtnAns2Col(changeColour(btnAns2, btnAns2Col)); }
 
     @FXML
     void btnAns3Pressed(ActionEvent event) {
@@ -268,67 +302,55 @@ public class Controller {
         setBtnAns4Col(changeColour(btnAns4, btnAns4Col));
     }
 
+
     @FXML
-    void btnGuessPressed(ActionEvent event) {
+    void btnCheckPressed(ActionEvent event) {
 
-        if (attemptsNumber == 0) {
-            answerLine = new Object[]{getBtnAns1Col(), getBtnAns2Col(), getBtnAns3Col(), getBtnAns4Col()};
-            if (duplicateCheck(answerLine)) {
-                Popup duplicatePopup = new Popup("Your hidden row can not contain duplicated colours!");
-                return;
-            } else {
-                btnAns1.setMouseTransparent(true);
-                btnAns2.setMouseTransparent(true);
-                btnAns3.setMouseTransparent(true);
-                btnAns4.setMouseTransparent(true);
-            }
+        Object[] guessLine = new Object[]{getBtnAns1Col(), getBtnAns2Col(), getBtnAns3Col(), getBtnAns4Col()};
+
+        if (duplicateCheck(guessLine)) {
+            Popup duplicatePopup = new Popup("Your answer row can not contain duplicated colours!");
+            return;
         }
-
-        lblAnswers.setVisible(true);
         attemptsNumber++;
+        if (attemptsNumber > 6) {
+            Popup loosePopup = new Popup("Game over!");
+            return;
+        }
         Guess guess = new Guess(answerLine);
-        Object[] randomGuess = possibleSolutions.randomGuess();
-        guess.setResult(randomGuess);
-        System.out.println("Attempt: " + attemptsNumber + " " + Arrays.asList(randomGuess));
+        guess.setResult(guessLine);
+        System.out.println("Attempt: " + attemptsNumber + " " + Arrays.asList(guessLine));
 
-        Button[] attemptButtons = btnMap.get("Attempt" + attemptsNumber);
         Button[] feedBackButtons = btnMap.get("FeedBack" + attemptsNumber);
 
-        for (int i = 0; i < attemptButtons.length; i++) disp(attemptButtons[i], (Colour) randomGuess[i]);
-
         for (int i = 0; i < feedBackButtons.length; i++) {
-            if (guess.getRightColours().contains(randomGuess[i]))
+            if (guess.getRightColours().contains(guessLine[i]))
                 feedBackButtons[i].setStyle("-fx-border-color: #000000; -fx-background-color: #ffffff");
             else feedBackButtons[i].setStyle("-fx-background-color: #939393");
 
             if (guess.getRightPosition()[i] != null) feedBackButtons[i].setStyle("-fx-background-color: #000000");
         }
 
-        if (Arrays.asList(randomGuess).equals(Arrays.asList(answerLine))) {
+        if (Arrays.asList(guessLine).equals(Arrays.asList(answerLine))) {
+            showHiddenRow();
             System.out.println("YAY!");
-            btnGuess.setDisable(true);
+            btnCheck.setDisable(true);
             Popup winPopup = new Popup("DONE!");
+        }
 
-        } else
-            possibleSolutions.update(guess.getRightColours(), guess.getRightPosition(), guess.getWrongPosition(), guess.getWrongColours(), randomGuess);
-
+        Button[] attemptButtons = btnMap.get("Attempt" + attemptsNumber);
+        for (int i = 0; i < attemptButtons.length; i++) disp(attemptButtons[i], (Colour) guessLine[i]);
     }
 
     @FXML
     void btnHelpPressed(ActionEvent event) {
-
-        Popup helpPopup = new Popup("Instructions: \nEnter your hidden row by clicking buttons - make sure to not duplicate colours! Click button \"Guess\" to make computer guess the answer. Buttons on right are feedback buttons\nwhite - right colour and wrong postion\nblack - right colour and position\ngray - wrong colour and position");
-
+        Popup helpPopup = new Popup("Instructions: \nEnter your answer row by clicking buttons. Click button \"Check\" to check the answer. Buttons on right are feedback buttons:\nwhite - right colour and wrong postion\nblack - right colour and position\ngray - wrong colour and position");
     }
 
     @FXML
     void btnAgainPressed(ActionEvent event) {
         initialize();
-        btnGuess.setDisable(false);
-        btnAns1.setMouseTransparent(false);
-        btnAns2.setMouseTransparent(false);
-        btnAns3.setMouseTransparent(false);
-        btnAns4.setMouseTransparent(false);
+        btnCheck.setDisable(false);
     }
 
     public Colour changeColour(Button btn, Colour btnCol) {
@@ -369,6 +391,12 @@ public class Controller {
         Set<Object> set = new HashSet<>(Arrays.asList(colours));
         if (set.size() != colours.length || set.contains(null)) return true;
         else return false;
+    }
+
+    private void showHiddenRow() {
+        for (int i = 1; i <= answerLine.length; i++) {
+            disp(hiddenBtnMap.get(i), (Colour) answerLine[i - 1]);
+        }
     }
 }
 
