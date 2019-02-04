@@ -338,12 +338,7 @@ public class ComputerPlayer {
     }
 
     @FXML
-    void btnHelpPressed(ActionEvent event) {
-
-        Popup helpPopup = new Popup(resourceBundle.getString("strInstructionsComp"));
-
-
-    }
+    void btnHelpPressed(ActionEvent event) { Popup helpPopup = new Popup(resourceBundle.getString("strInstructionsComp")); }
 
     @FXML
     void btnAgainPressed(ActionEvent event) {
@@ -397,16 +392,10 @@ public class ComputerPlayer {
 
 
     @FXML
-    void enPressed(MouseEvent event) {
-        changeLanguage("en");
-
-    }
+    void enPressed(MouseEvent event) { changeLanguage("en"); }
 
     @FXML
-    void plPressed(MouseEvent event) {
-        changeLanguage("pl");
-
-    }
+    void plPressed(MouseEvent event) { changeLanguage("pl"); }
 
 
     private void changeLanguage(String language) {

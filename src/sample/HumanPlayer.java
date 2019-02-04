@@ -23,7 +23,6 @@ public class HumanPlayer {
     private Colour[] colours = Colour.class.getEnumConstants();
     private Object[] answerLine;
 
-
     @FXML
     private ImageView plLang;
 
@@ -298,14 +297,9 @@ public class HumanPlayer {
                 button.setStyle("-fx-background-color: transparent");
             }
         }
-
         answerLine = possibleSolutions.randomGuess();
-        System.out.println(Arrays.asList(answerLine));
 
-        for (int i = 1; i <= hiddenBtnMap.size(); i++) {
-            hiddenBtnMap.get(i).setStyle("-fx-background-color: #939393");
-
-        }
+        for (int i = 1; i <= hiddenBtnMap.size(); i++) { hiddenBtnMap.get(i).setStyle("-fx-background-color: #939393"); }
     }
 
     @FXML
@@ -314,9 +308,7 @@ public class HumanPlayer {
     }
 
     @FXML
-    void btnAns2Pressed(ActionEvent event) {
-        setBtnAns2Col(changeColour(btnAns2, btnAns2Col));
-    }
+    void btnAns2Pressed(ActionEvent event) { setBtnAns2Col(changeColour(btnAns2, btnAns2Col)); }
 
     @FXML
     void btnAns3Pressed(ActionEvent event) {
@@ -333,7 +325,6 @@ public class HumanPlayer {
     void btnCheckPressed(ActionEvent event) {
 
         if (attemptsNumber == 0) lblAnswers.setVisible(true);
-
 
         Object[] guessLine = new Object[]{getBtnAns1Col(), getBtnAns2Col(), getBtnAns3Col(), getBtnAns4Col()};
 
@@ -428,18 +419,11 @@ public class HumanPlayer {
         }
     }
 
+    @FXML
+    void enPressed(MouseEvent event) { changeLanguage("en"); }
 
     @FXML
-    void enPressed(MouseEvent event) {
-        changeLanguage("en");
-
-    }
-
-    @FXML
-    void plPressed(MouseEvent event) {
-        changeLanguage("pl");
-
-    }
+    void plPressed(MouseEvent event) { changeLanguage("pl"); }
 
     private void changeLanguage(String language) {
         locale = new Locale(language);

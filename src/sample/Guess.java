@@ -16,13 +16,9 @@ public class Guess {
         this.answerLine = answerLine;
     }
 
-    public Object[] getRightPosition() {
-        return rightPosition;
-    }
+    public Object[] getRightPosition() { return rightPosition; }
 
-    public Object[] getWrongPosition() {
-        return wrongPosition;
-    }
+    public Object[] getWrongPosition() { return wrongPosition; }
 
     public List<Object> getRightColours() {
         return rightColours;

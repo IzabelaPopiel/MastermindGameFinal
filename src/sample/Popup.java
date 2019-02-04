@@ -18,11 +18,11 @@ public class Popup {
     public void display() {
         Stage popupwindow = new Stage();
         VBox layout = new VBox(10);
-        Button gotItBtn = new Button("OK");
+        Button okBtn = new Button("OK");
         Label labelInfo = new Label(info);
         labelInfo.setWrapText(true);
-        layout.getChildren().addAll(labelInfo, gotItBtn);
-        gotItBtn.setOnAction(e -> popupwindow.close());
+        layout.getChildren().addAll(labelInfo, okBtn);
+        okBtn.setOnAction(e -> popupwindow.close());
         layout.setAlignment(Pos.CENTER);
         labelInfo.setPadding(new Insets(10, 10, 10, 10));
         Scene scene1 = new Scene(layout, 300, 200);
