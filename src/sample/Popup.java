@@ -18,7 +18,7 @@ public class Popup {
     public void display() {
         Stage popupwindow = new Stage();
         VBox layout = new VBox(10);
-        Button gotItBtn = new Button("GOT IT!");
+        Button gotItBtn = new Button("OK");
         Label labelInfo = new Label(info);
         labelInfo.setWrapText(true);
         layout.getChildren().addAll(labelInfo, gotItBtn);

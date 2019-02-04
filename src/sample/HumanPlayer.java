@@ -4,10 +4,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
+import java.io.File;
 import java.util.*;
 
 public class HumanPlayer {
+
+    private ResourceBundle resourceBundle;
+    private Locale locale;
 
     private HashMap<String, Button[]> btnMap = new HashMap<>();
     private HashMap<Integer, Button> hiddenBtnMap = new HashMap<>();
@@ -16,6 +23,16 @@ public class HumanPlayer {
     private Colour[] colours = Colour.class.getEnumConstants();
     private Object[] answerLine;
 
+
+    @FXML
+    private ImageView plLang;
+
+    @FXML
+    private ImageView enLang;
+    @FXML
+    private Label lblHiddenRow;
+    @FXML
+    private Label lblYourAnswer;
     @FXML
     private Button btnCheck;
 
@@ -235,6 +252,11 @@ public class HumanPlayer {
     }
 
     public void initialize() {
+        changeLanguage("en");
+
+        plLang.setImage((new Image(new File("pl_flag.png").toURI().toString())));
+        enLang.setImage((new Image(new File("en_flag.png").toURI().toString())));
+
         possibleSolutions = new AllPossibleSolutions();
         possibleSolutions.heapPermutation(colours, colours.length, 4);
         attemptsNumber = 0;
@@ -243,6 +265,8 @@ public class HumanPlayer {
         btnAns2.setMouseTransparent(false);
         btnAns3.setMouseTransparent(false);
         btnAns4.setMouseTransparent(false);
+
+        lblAnswers.setVisible(false);
 
         hiddenBtnMap.put(1, btnHid1);
         hiddenBtnMap.put(2, btnHid2);
@@ -290,7 +314,9 @@ public class HumanPlayer {
     }
 
     @FXML
-    void btnAns2Pressed(ActionEvent event) { setBtnAns2Col(changeColour(btnAns2, btnAns2Col)); }
+    void btnAns2Pressed(ActionEvent event) {
+        setBtnAns2Col(changeColour(btnAns2, btnAns2Col));
+    }
 
     @FXML
     void btnAns3Pressed(ActionEvent event) {
@@ -306,15 +332,18 @@ public class HumanPlayer {
     @FXML
     void btnCheckPressed(ActionEvent event) {
 
+        if (attemptsNumber == 0) lblAnswers.setVisible(true);
+
+
         Object[] guessLine = new Object[]{getBtnAns1Col(), getBtnAns2Col(), getBtnAns3Col(), getBtnAns4Col()};
 
         if (duplicateCheck(guessLine)) {
-            Popup duplicatePopup = new Popup("Your answer row can not contain duplicated colours!");
+            Popup duplicatePopup = new Popup(resourceBundle.getString("strDuplicate"));
             return;
         }
         attemptsNumber++;
         if (attemptsNumber > 6) {
-            Popup loosePopup = new Popup("Game over!");
+            Popup loosePopup = new Popup(resourceBundle.getString("strOver"));
             return;
         }
         Guess guess = new Guess(answerLine);
@@ -335,7 +364,7 @@ public class HumanPlayer {
             showHiddenRow();
             System.out.println("YAY!");
             btnCheck.setDisable(true);
-            Popup winPopup = new Popup("DONE!");
+            Popup winPopup = new Popup(resourceBundle.getString("strWin"));
         }
 
         Button[] attemptButtons = btnMap.get("Attempt" + attemptsNumber);
@@ -344,7 +373,7 @@ public class HumanPlayer {
 
     @FXML
     void btnHelpPressed(ActionEvent event) {
-        Popup helpPopup = new Popup("Instructions: \nEnter your answer row by clicking buttons. Click button \"Check\" to check the answer. Buttons on right are feedback buttons:\nwhite - right colour and wrong postion\nblack - right colour and position\ngray - wrong colour and position");
+        Popup helpPopup = new Popup(resourceBundle.getString("strInstructionsHum"));
     }
 
     @FXML
@@ -397,6 +426,30 @@ public class HumanPlayer {
         for (int i = 1; i <= answerLine.length; i++) {
             disp(hiddenBtnMap.get(i), (Colour) answerLine[i - 1]);
         }
+    }
+
+
+    @FXML
+    void enPressed(MouseEvent event) {
+        changeLanguage("en");
+
+    }
+
+    @FXML
+    void plPressed(MouseEvent event) {
+        changeLanguage("pl");
+
+    }
+
+    private void changeLanguage(String language) {
+        locale = new Locale(language);
+        resourceBundle = ResourceBundle.getBundle("sample.language", locale);
+        lblHiddenRow.setText(resourceBundle.getString("lblHidRow"));
+        lblYourAnswer.setText(resourceBundle.getString("lblYourAnsRow"));
+        lblAnswers.setText(resourceBundle.getString("lblAnsHis"));
+        btnCheck.setText(resourceBundle.getString("btnCheck"));
+        btnHelp.setText(resourceBundle.getString("btnHelp"));
+        btnAgain.setText(resourceBundle.getString("btnAgain"));
     }
 }
 

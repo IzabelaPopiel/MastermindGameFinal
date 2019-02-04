@@ -4,16 +4,33 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
+import java.io.File;
 import java.util.*;
 
 public class ComputerPlayer {
+
+    private ResourceBundle resourceBundle;
+    private Locale locale;
 
     private HashMap<String, Button[]> btnMap = new HashMap<>();
     private int attemptsNumber;
     private AllPossibleSolutions possibleSolutions;
     private Colour[] colours = Colour.class.getEnumConstants();
     private Object[] answerLine;
+
+
+    @FXML
+    private ImageView plLang;
+
+    @FXML
+    private ImageView enLang;
+
+    @FXML
+    private Label lblHiddenRow;
 
     @FXML
     private Label lblAnswers;
@@ -189,6 +206,12 @@ public class ComputerPlayer {
 
 
     public void initialize() {
+
+        changeLanguage("en");
+
+        plLang.setImage((new Image(new File("pl_flag.png").toURI().toString())));
+        enLang.setImage((new Image(new File("en_flag.png").toURI().toString())));
+
         possibleSolutions = new AllPossibleSolutions();
         possibleSolutions.heapPermutation(colours, colours.length, 4);
         attemptsNumber = 0;
@@ -274,7 +297,7 @@ public class ComputerPlayer {
         if (attemptsNumber == 0) {
             answerLine = new Object[]{getBtnAns1Col(), getBtnAns2Col(), getBtnAns3Col(), getBtnAns4Col()};
             if (duplicateCheck(answerLine)) {
-                Popup duplicatePopup = new Popup("Your hidden row can not contain duplicated colours!");
+                Popup duplicatePopup = new Popup(resourceBundle.getString("strDuplicate"));
                 return;
             } else {
                 btnAns1.setMouseTransparent(true);
@@ -307,7 +330,7 @@ public class ComputerPlayer {
         if (Arrays.asList(randomGuess).equals(Arrays.asList(answerLine))) {
             System.out.println("YAY!");
             btnGuess.setDisable(true);
-            Popup winPopup = new Popup("DONE!");
+            Popup winPopup = new Popup(resourceBundle.getString("strWin"));
 
         } else
             possibleSolutions.update(guess.getRightColours(), guess.getRightPosition(), guess.getWrongPosition(), guess.getWrongColours(), randomGuess);
@@ -317,7 +340,8 @@ public class ComputerPlayer {
     @FXML
     void btnHelpPressed(ActionEvent event) {
 
-        Popup helpPopup = new Popup("Instructions: \nEnter your hidden row by clicking buttons - make sure to not duplicate colours! Click button \"Guess\" to make computer guess the answer. Buttons on the right are feedback buttons\nwhite - right colour and wrong postion\nblack - right colour and position\ngray - wrong colour and position");
+        Popup helpPopup = new Popup(resourceBundle.getString("strInstructionsComp"));
+
 
     }
 
@@ -369,6 +393,30 @@ public class ComputerPlayer {
         Set<Object> set = new HashSet<>(Arrays.asList(colours));
         if (set.size() != colours.length || set.contains(null)) return true;
         else return false;
+    }
+
+
+    @FXML
+    void enPressed(MouseEvent event) {
+        changeLanguage("en");
+
+    }
+
+    @FXML
+    void plPressed(MouseEvent event) {
+        changeLanguage("pl");
+
+    }
+
+
+    private void changeLanguage(String language) {
+        locale = new Locale(language);
+        resourceBundle = ResourceBundle.getBundle("sample.language", locale);
+        lblHiddenRow.setText(resourceBundle.getString("lblHidRow"));
+        lblAnswers.setText(resourceBundle.getString("lblAnsRow"));
+        btnGuess.setText(resourceBundle.getString("btnGuess"));
+        btnHelp.setText(resourceBundle.getString("btnHelp"));
+        btnAgain.setText(resourceBundle.getString("btnAgain"));
     }
 }
 
