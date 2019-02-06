@@ -10,14 +10,16 @@ class AllPossibleSolutions {
         return solutions;
     }
 
-    public void addToSet(Object elements[], int n) {
+    private void addToSet(Object elements[], int n) {
         List<Object> newElement = new ArrayList<>();
-        for (int i = 0; i < n; i++) { newElement.add(elements[i]); }
+        for (int i = 0; i < n; i++) {
+            newElement.add(elements[i]);
+        }
         solutions.add(newElement);
     }
 
     //Generating permutation using Heap Algorithm
-    void heapPermutation(Object[] elements, int size, int n) {
+    public void heapPermutation(Object[] elements, int size, int n) {
         // if size becomes 1 then prints the obtained
         // permutation
         if (size == 1)
@@ -73,7 +75,7 @@ class AllPossibleSolutions {
         solutions.removeIf((List<Object> o) -> o.equals(Arrays.asList(randomGuess)));
     }
 
-    public Object[] randomGuess() {
+    public Object[] randomSolution() {
         return solutions.iterator().next().toArray();
     }
 }

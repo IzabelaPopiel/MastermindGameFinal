@@ -13,7 +13,7 @@ import java.util.*;
 
 public class ComputerPlayer {
 
-    private ResourceBundle resourceBundle;
+    private ResourceBundle resourceBundle  = ResourceBundle.getBundle("sample.language", new Locale("en"));
     private Locale locale;
 
     private HashMap<String, Button[]> btnMap = new HashMap<>();
@@ -207,8 +207,6 @@ public class ComputerPlayer {
 
     public void initialize() {
 
-        changeLanguage("en");
-
         plLang.setImage((new Image(new File("pl_flag.png").toURI().toString())));
         enLang.setImage((new Image(new File("en_flag.png").toURI().toString())));
 
@@ -310,7 +308,7 @@ public class ComputerPlayer {
         lblAnswers.setVisible(true);
         attemptsNumber++;
         Guess guess = new Guess(answerLine);
-        Object[] randomGuess = possibleSolutions.randomGuess();
+        Object[] randomGuess = possibleSolutions.randomSolution();
         guess.setResult(randomGuess);
         System.out.println("Attempt: " + attemptsNumber + " " + Arrays.asList(randomGuess));
 
@@ -350,7 +348,7 @@ public class ComputerPlayer {
         btnAns4.setMouseTransparent(false);
     }
 
-    public Colour changeColour(Button btn, Colour btnCol) {
+    private Colour changeColour(Button btn, Object btnCol) {
 
         int index = Arrays.asList(colours).indexOf(btnCol);
         if (index == colours.length - 1) index = 0;

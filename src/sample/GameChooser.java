@@ -86,10 +86,7 @@ public class GameChooser {
     }
 
     @FXML
-    void plPressed(MouseEvent event) {
-        changeLanguage("pl");
-
-    }
+    void plPressed(MouseEvent event) { changeLanguage("pl"); }
 
     private void changeLanguage(String language) {
         locale = new Locale(language);

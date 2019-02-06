@@ -13,7 +13,7 @@ import java.util.*;
 
 public class HumanPlayer {
 
-    private ResourceBundle resourceBundle;
+    private ResourceBundle resourceBundle = ResourceBundle.getBundle("sample.language", new Locale("en"));
     private Locale locale;
 
     private HashMap<String, Button[]> btnMap = new HashMap<>();
@@ -251,7 +251,6 @@ public class HumanPlayer {
     }
 
     public void initialize() {
-        changeLanguage("en");
 
         plLang.setImage((new Image(new File("pl_flag.png").toURI().toString())));
         enLang.setImage((new Image(new File("en_flag.png").toURI().toString())));
@@ -297,9 +296,11 @@ public class HumanPlayer {
                 button.setStyle("-fx-background-color: transparent");
             }
         }
-        answerLine = possibleSolutions.randomGuess();
+        answerLine = possibleSolutions.randomSolution();
 
-        for (int i = 1; i <= hiddenBtnMap.size(); i++) { hiddenBtnMap.get(i).setStyle("-fx-background-color: #939393"); }
+        for (int i = 1; i <= hiddenBtnMap.size(); i++) {
+            hiddenBtnMap.get(i).setStyle("-fx-background-color: #939393");
+        }
     }
 
     @FXML
@@ -308,7 +309,9 @@ public class HumanPlayer {
     }
 
     @FXML
-    void btnAns2Pressed(ActionEvent event) { setBtnAns2Col(changeColour(btnAns2, btnAns2Col)); }
+    void btnAns2Pressed(ActionEvent event) {
+        setBtnAns2Col(changeColour(btnAns2, btnAns2Col));
+    }
 
     @FXML
     void btnAns3Pressed(ActionEvent event) {
@@ -373,7 +376,7 @@ public class HumanPlayer {
         btnCheck.setDisable(false);
     }
 
-    public Colour changeColour(Button btn, Colour btnCol) {
+    private Colour changeColour(Button btn, Colour btnCol) {
 
         int index = Arrays.asList(colours).indexOf(btnCol);
         if (index == colours.length - 1) index = 0;
@@ -420,10 +423,14 @@ public class HumanPlayer {
     }
 
     @FXML
-    void enPressed(MouseEvent event) { changeLanguage("en"); }
+    void enPressed(MouseEvent event) {
+        changeLanguage("en");
+    }
 
     @FXML
-    void plPressed(MouseEvent event) { changeLanguage("pl"); }
+    void plPressed(MouseEvent event) {
+        changeLanguage("pl");
+    }
 
     private void changeLanguage(String language) {
         locale = new Locale(language);

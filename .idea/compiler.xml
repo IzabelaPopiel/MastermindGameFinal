@@ -14,7 +14,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="MastermindGame" options="--add-exports=jdk.scripting.nashorn/jdk.nashorn.internal.objects=ALL-UNNAMED" />
+      <module name="MastermindGame" options="--add-exports=jdk.scripting.nashorn/jdk.nashorn.internal.objects=ALL-UNNAMED --add-exports=jdk.hotspot.agent/sun.jvm.hotspot.utilities=ALL-UNNAMED" />
     </option>
   </component>
 </project>
