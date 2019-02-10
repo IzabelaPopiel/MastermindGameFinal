@@ -10,16 +10,16 @@ public class GuessTest {
 
     @BeforeAll
     static void init() {
-        System.out.println("Witamy w testach");
+        System.out.println("Welcome to tests");
     }
 
     @BeforeEach
     void beforeTest() {
-        System.out.println("Zaraz uruchomi sie kolejny test...");
+        System.out.println("Next test is going to launch...");
     }
 
     @Test
-    @DisplayName("Test ustawiania wyniku proby")
+    @DisplayName("Setting attempt result test")
     void setResults() {
         Integer[] arr = new Integer[]{1, 2, 3};
         guess = new Guess(arr);

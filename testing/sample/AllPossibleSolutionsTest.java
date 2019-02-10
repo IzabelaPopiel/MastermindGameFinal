@@ -12,16 +12,16 @@ public class AllPossibleSolutionsTest {
 
     @BeforeAll
     static void init() {
-        System.out.println("Witamy w testach");
+        System.out.println("Welcome to tests");
     }
 
     @BeforeEach
     void beforeTest() {
-        System.out.println("Zaraz uruchomi sie kolejny test...");
+        System.out.println("Next test is going to launch...");
     }
 
     @Test
-    @DisplayName("Test tworzenia permutacji")
+    @DisplayName("Creating permutation test")
     void permute() {
         allPossibleSolutions = new AllPossibleSolutions();
         Integer[] arr = new Integer[]{1, 2, 3, 4};
@@ -31,7 +31,7 @@ public class AllPossibleSolutionsTest {
     }
 
     @Test
-    @DisplayName("Test na permutacje bez powtorzen")
+    @DisplayName("Creating permutation without duplicates test")
     void noDuplicate() {
         allPossibleSolutions = new AllPossibleSolutions();
         Integer[] arr = new Integer[]{1, 2, 3, 4};
@@ -42,7 +42,7 @@ public class AllPossibleSolutionsTest {
     }
 
     @Test
-    @DisplayName("Test na aktualizacje zbioru rozwiazan")
+    @DisplayName("Updating solution set test")
     void update() {
         allPossibleSolutions = new AllPossibleSolutions();
         Integer[] arr = new Integer[]{1, 2, 3, 4};

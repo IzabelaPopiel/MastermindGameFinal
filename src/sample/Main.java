@@ -1,3 +1,6 @@
+/**
+ * Class launching application.
+ */
 package sample;
 
 import javafx.application.Application;
@@ -8,6 +11,10 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    /**
+     * Displays new stage with user interface defined in fxml file.
+     * @param primaryStage
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("gameChooser.fxml"));
@@ -16,7 +23,9 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
+    /**
+     * Launches application.
+     */
     public static void main(String[] args) {
         launch(args);
     }

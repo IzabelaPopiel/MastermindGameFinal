@@ -1,3 +1,6 @@
+/**
+ *All colours used in game.
+ */
 package sample;
 
 public enum Colour {

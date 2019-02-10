@@ -1,3 +1,6 @@
+/**
+ * Class displaying new Popup window with proper information.
+ */
 package sample;
 
 import javafx.geometry.Insets;
@@ -10,11 +13,17 @@ import javafx.stage.*;
 public class Popup {
     private String info;
 
+    /**
+     * Creates new object and displays new Popup.
+     * @param info String with information to display.
+     */
     public Popup(String info) {
         this.info = info;
         display();
     }
-
+    /**
+     * Displays new stage with information label and button.
+     */
     public void display() {
         Stage popupwindow = new Stage();
         VBox layout = new VBox(10);

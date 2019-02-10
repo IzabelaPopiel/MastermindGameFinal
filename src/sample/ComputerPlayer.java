@@ -1,3 +1,6 @@
+/**
+ *Controller for game version where player enters hidden row and computer role is to guess the correct answer.
+ */
 package sample;
 
 import javafx.event.ActionEvent;
@@ -13,198 +16,353 @@ import java.util.*;
 
 public class ComputerPlayer {
 
+    /**
+     *Represents ResourceBundle which contains locale-specific resource with english language version as default.
+     */
     private ResourceBundle resourceBundle  = ResourceBundle.getBundle("sample.language", new Locale("en"));
+    /**
+     *Represents Locale class object.
+     */
     private Locale locale;
 
+    /**
+     *Represents HashMap of buttons used in application.
+     */
     private HashMap<String, Button[]> btnMap = new HashMap<>();
+    /**
+     *Represents number of attempts.
+     */
     private int attemptsNumber;
+    /**
+     *Represents object of class AllPossible solutions.
+     */
     private AllPossibleSolutions possibleSolutions;
+    /**
+     *Represents array of all colours used in game.
+     */
     private Colour[] colours = Colour.class.getEnumConstants();
+    /**
+     *Represents array containing answer line.
+     */
     private Object[] answerLine;
 
-
+    /**
+     *Represents ImageView with polish flag.
+     */
     @FXML
     private ImageView plLang;
-
+    /**
+     *Represents ImageView with british flag.
+     */
     @FXML
     private ImageView enLang;
-
+    /**
+     *Represents label 'Hidden row'.
+     */
     @FXML
     private Label lblHiddenRow;
-
+    /**
+     *Represents label 'Answers'.
+     */
     @FXML
     private Label lblAnswers;
-
+    /**
+     *Represents button 'Guess'.
+     */
     @FXML
     private Button btnGuess;
 
+    /**
+     *Represents 1st button in answer.
+     */
     @FXML
     private Button btnAns1;
+    /**
+     *Represents colour of 1st button in answer.
+     */
     private Colour btnAns1Col;
-
+    /**
+     *Represents 2nd button in answer.
+     */
     @FXML
     private Button btnAns2;
+    /**
+     *Represents colour of 2nd button in answer.
+     */
     private Colour btnAns2Col;
-
+    /**
+     *Represents 3rd button in answer.
+     */
     @FXML
     private Button btnAns3;
+    /**
+     *Represents colour of 3rd button in answer.
+     */
     private Colour btnAns3Col;
-
+    /**
+     *Represents 4th button in answer.
+     */
     @FXML
     private Button btnAns4;
+    /**
+     *Represents colour of 4th button in answer.
+     */
     private Colour btnAns4Col;
 
+    /**
+     *Represents 1st button in answer in 1st attempt.
+     */
     @FXML
     private Button btnAtt11;
-
+    /**
+     *Represents 2nd button in answer in 1st attempt.
+     */
     @FXML
     private Button btnAtt12;
-
+    /**
+     *Represents 3rd button in answer in 1st attempt.
+     */
     @FXML
     private Button btnAtt13;
-
+    /**
+     *Represents 4th button in answer in 1st attempt.
+     */
     @FXML
     private Button btnAtt14;
-
+    /**
+     *Represents 1st feedback button in answer in 1st attempt.
+     */
     @FXML
     private Button btnFeedBack11;
-
+    /**
+     *Represents 3rd feedback button in answer in 1st attempt.
+     */
     @FXML
     private Button btnFeedBack13;
-
+    /**
+     *Represents 2nd feedback button in answer in 1st attempt.
+     */
     @FXML
     private Button btnFeedBack12;
-
+    /**
+     *Represents 4th feedback button in answer in 1st attempt.
+     */
     @FXML
     private Button btnFeedBack14;
-
+    /**
+     *Represents 1st feedback button in answer in 2nd attempt.
+     */
     @FXML
     private Button btnFeedBack21;
-
+    /**
+     *Represents 3rd feedback button in answer in 2nd attempt.
+     */
     @FXML
     private Button btnFeedBack23;
-
+    /**
+     *Represents 2nd feedback button in answer in 2nd attempt.
+     */
     @FXML
     private Button btnFeedBack22;
-
+    /**
+     *Represents 4th feedback button in answer in 2nd attempt.
+     */
     @FXML
     private Button btnFeedBack24;
-
+    /**
+     *Represents 1st feedback button in answer in 3rd attempt.
+     */
     @FXML
     private Button btnFeedBack31;
-
+    /**
+     *Represents 3rd feedback button in answer in 3rd attempt.
+     */
     @FXML
     private Button btnFeedBack33;
-
+    /**
+     *Represents 2nd feedback button in answer in 3rd attempt.
+     */
     @FXML
     private Button btnFeedBack32;
-
+    /**
+     *Represents 4th feedback button in answer in 3rd attempt.
+     */
     @FXML
     private Button btnFeedBack34;
-
+    /**
+     *Represents 1st feedback button in answer in 4th attempt.
+     */
     @FXML
     private Button btnFeedBack41;
-
+    /**
+     *Represents 3rd feedback button in answer in 4th attempt.
+     */
     @FXML
     private Button btnFeedBack43;
-
+    /**
+     *Represents 2nd feedback button in answer in 4th attempt.
+     */
     @FXML
     private Button btnFeedBack42;
-
+    /**
+     *Represents 4th feedback button in answer in 4th attempt.
+     */
     @FXML
     private Button btnFeedBack44;
-
+    /**
+     *Represents 1st feedback button in answer in 5th attempt.
+     */
     @FXML
     private Button btnFeedBack51;
-
+    /**
+     *Represents 3rd feedback button in answer in 5th attempt.
+     */
     @FXML
     private Button btnFeedBack53;
-
+    /**
+     *Represents 2nd feedback button in answer in 5th attempt.
+     */
     @FXML
     private Button btnFeedBack52;
-
+    /**
+     *Represents 4th feedback button in answer in 5th attempt.
+     */
     @FXML
     private Button btnFeedBack54;
-
+    /**
+     *Represents 1st feedback button in answer in 6th attempt.
+     */
     @FXML
     private Button btnFeedBack61;
-
+    /**
+     *Represents 3rd feedback button in answer in 6th attempt.
+     */
     @FXML
     private Button btnFeedBack63;
-
+    /**
+     *Represents 2nd feedback button in answer in 6th attempt.
+     */
     @FXML
     private Button btnFeedBack62;
-
+    /**
+     *Represents 4th feedback button in answer in 6th attempt.
+     */
     @FXML
     private Button btnFeedBack64;
-
+    /**
+     *Represents 1st button in answer in 2nd attempt.
+     */
     @FXML
     private Button btnAtt21;
-
+    /**
+     *Represents 2nd button in answer in 2nd attempt.
+     */
     @FXML
     private Button btnAtt22;
-
+    /**
+     *Represents 3rd button in answer in 2nd attempt.
+     */
     @FXML
     private Button btnAtt23;
-
+    /**
+     *Represents 4th button in answer in 2nd attempt.
+     */
     @FXML
     private Button btnAtt24;
-
+    /**
+     *Represents 1st button in answer in 3rd attempt.
+     */
     @FXML
     private Button btnAtt31;
-
+    /**
+     *Represents 2nd button in answer in 3rd attempt.
+     */
     @FXML
     private Button btnAtt32;
-
+    /**
+     *Represents 3rd button in answer in 3rd attempt.
+     */
     @FXML
     private Button btnAtt33;
-
+    /**
+     *Represents 4th button in answer in 3rd attempt.
+     */
     @FXML
     private Button btnAtt34;
-
+    /**
+     *Represents 1st button in answer in 4th attempt.
+     */
     @FXML
     private Button btnAtt41;
-
+    /**
+     *Represents 2nd button in answer in 4th attempt.
+     */
     @FXML
     private Button btnAtt42;
-
+    /**
+     *Represents 3rd button in answer in 4th attempt.
+     */
     @FXML
     private Button btnAtt43;
-
+    /**
+     *Represents 4th button in answer in 4th attempt.
+     */
     @FXML
     private Button btnAtt44;
-
+    /**
+     *Represents 1st button in answer in 5th attempt.
+     */
     @FXML
     private Button btnAtt51;
-
+    /**
+     *Represents 2nd button in answer in 5th attempt.
+     */
     @FXML
     private Button btnAtt52;
-
+    /**
+     *Represents 3rd button in answer in 5th attempt.
+     */
     @FXML
     private Button btnAtt53;
-
+    /**
+     *Represents 4th button in answer in 5th attempt.
+     */
     @FXML
     private Button btnAtt54;
-
+    /**
+     *Represents 1st button in answer in 6th attempt.
+     */
     @FXML
     private Button btnAtt61;
-
+    /**
+     *Represents 2nd button in answer in 6th attempt.
+     */
     @FXML
     private Button btnAtt62;
-
+    /**
+     *Represents 3rd button in answer in 6th attempt.
+     */
     @FXML
     private Button btnAtt63;
-
+    /**
+     *Represents 4th button in answer in 6th attempt.
+     */
     @FXML
     private Button btnAtt64;
-
+    /**
+     *Represents help button.
+     */
     @FXML
     private Button btnHelp;
-
+    /**
+     *Represents play again button.
+     */
     @FXML
     private Button btnAgain;
 
-
+    /**
+     *Initialize method. Sets flag images in  language change places. Creates new AllPossibleSolutions object, call method heapPermutation() to create new set of all solutions. Sets number of attempts on zero. Puts buttons into HashMap. Makes all attempt and feedback buttons tansparent. hides label 'Answers'.
+     */
     public void initialize() {
 
         plLang.setImage((new Image(new File("pl_flag.png").toURI().toString())));
@@ -237,58 +395,86 @@ public class ComputerPlayer {
         lblAnswers.setVisible(false);
     }
 
+    /**
+     *Sets colour of 1st button in answer.
+     */
     public void setBtnAns1Col(Colour btnAns1Col) {
         this.btnAns1Col = btnAns1Col;
     }
-
+    /**
+     *Sets colour of 2nd button in answer.
+     */
     public void setBtnAns2Col(Colour btnAns2Col) {
         this.btnAns2Col = btnAns2Col;
     }
-
+    /**
+     *Sets colour of 3rd button in answer.
+     */
     public void setBtnAns3Col(Colour btnAns3Col) {
         this.btnAns3Col = btnAns3Col;
     }
-
+    /**
+     *Sets colour of 4th button in answer.
+     */
     public void setBtnAns4Col(Colour btnAns4Col) {
         this.btnAns4Col = btnAns4Col;
     }
-
+    /**
+     *Gets colour of 1st button in answer.
+     */
     public Colour getBtnAns1Col() {
         return btnAns1Col;
     }
-
+    /**
+     *Gets colour of 2nd button in answer.
+     */
     public Colour getBtnAns2Col() {
         return btnAns2Col;
     }
-
+    /**
+     *Gets colour of 3rd button in answer.
+     */
     public Colour getBtnAns3Col() {
         return btnAns3Col;
     }
-
+    /**
+     *Gets colour of 4th button in answer.
+     */
     public Colour getBtnAns4Col() {
         return btnAns4Col;
     }
 
+    /**
+     *Recall colour changing method on 1st button in answer click.
+     */
     @FXML
     void btnAns1Pressed(ActionEvent event) {
         setBtnAns1Col(changeColour(btnAns1, btnAns1Col));
     }
-
+    /**
+     *Recall colour changing method on 2nd button in answer click.
+     */
     @FXML
     void btnAns2Pressed(ActionEvent event) {
         setBtnAns2Col(changeColour(btnAns2, btnAns2Col));
     }
-
+    /**
+     *Recall colour changing method on 3rd button in answer click.
+     */
     @FXML
     void btnAns3Pressed(ActionEvent event) {
         setBtnAns3Col(changeColour(btnAns3, btnAns3Col));
     }
-
+    /**
+     *Recall colour changing method on 4th button in answer click.
+     */
     @FXML
     void btnAns4Pressed(ActionEvent event) {
         setBtnAns4Col(changeColour(btnAns4, btnAns4Col));
     }
-
+    /**
+     *Method recalled on button Guess click. If this is 1st attempt answer line is set to array of current colours in hidden row. If colours are duplicated new info Popup appears. New random guess is taken from solutions set, then it is compared with answer. New guess and feeback buttons appear in window. If new guess and answer are the same then new Popup with win info appears.
+     */
     @FXML
     void btnGuessPressed(ActionEvent event) {
 
@@ -335,9 +521,15 @@ public class ComputerPlayer {
 
     }
 
+    /**
+     *Atfer pressing help button appears new Popup with help information.
+     */
     @FXML
     void btnHelpPressed(ActionEvent event) { Popup helpPopup = new Popup(resourceBundle.getString("strInstructionsComp")); }
 
+    /**
+     *Initialize contoller one more time. Enables Guess button and answer buttons.
+     */
     @FXML
     void btnAgainPressed(ActionEvent event) {
         initialize();
@@ -347,7 +539,12 @@ public class ComputerPlayer {
         btnAns3.setMouseTransparent(false);
         btnAns4.setMouseTransparent(false);
     }
-
+    /**
+     *Changes colour of button.
+     * @param btn button
+     * @param btnCol colour of button
+     * @return newColour - new colour of button
+     */
     private Colour changeColour(Button btn, Object btnCol) {
 
         int index = Arrays.asList(colours).indexOf(btnCol);
@@ -359,6 +556,9 @@ public class ComputerPlayer {
         return newColour;
     }
 
+    /**
+     *Displays new button colour
+     */
     private void disp(Button btn, Colour newCol) {
         switch (newCol) {
             case RED:
@@ -382,20 +582,32 @@ public class ComputerPlayer {
         }
     }
 
+    /**
+     *Checks if colours in array are duplicated.
+     * @return true if colours are duplicated
+     * @return false if colours are unique
+     */
     private boolean duplicateCheck(Object[] colours) {
         Set<Object> set = new HashSet<>(Arrays.asList(colours));
         if (set.size() != colours.length || set.contains(null)) return true;
         else return false;
     }
 
-
+    /**
+     *Changes language to english.
+     */
     @FXML
     void enPressed(MouseEvent event) { changeLanguage("en"); }
-
+    /**
+     *Changes language to polish.
+     */
     @FXML
     void plPressed(MouseEvent event) { changeLanguage("pl"); }
 
-
+    /**
+     *Changes language to chosen one. Sets all texts in application window on Strings from resource file.
+     * @param language chosen language
+     */
     private void changeLanguage(String language) {
         locale = new Locale(language);
         resourceBundle = ResourceBundle.getBundle("sample.language", locale);

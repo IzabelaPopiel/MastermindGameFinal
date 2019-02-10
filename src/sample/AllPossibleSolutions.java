@@ -1,15 +1,30 @@
+/**
+ * Class containing all possible solutions of game.
+ */
 package sample;
 
 import java.util.*;
 
 class AllPossibleSolutions {
 
+    /**
+     * Represents HashSet of all solutions.
+     */
     private Set<List<Object>> solutions = new HashSet<>();
 
+    /**
+     * Gets HashSet of all solutions.
+     * @return all solutions
+     */
     public Set<List<Object>> getSolutions() {
         return solutions;
     }
 
+    /**
+     * Adds new solution to HashSet
+     * @param elements array of elements
+     * @param n required length of added solution
+     */
     private void addToSet(Object elements[], int n) {
         List<Object> newElement = new ArrayList<>();
         for (int i = 0; i < n; i++) {
@@ -18,26 +33,26 @@ class AllPossibleSolutions {
         solutions.add(newElement);
     }
 
-    //Generating permutation using Heap Algorithm
+    /**
+     * Generates permutation of input elements using Heap Algorithm.
+     * @param elements array of elements
+     * @param size size of array
+     * @param n required length of added solution
+     */
     public void heapPermutation(Object[] elements, int size, int n) {
-        // if size becomes 1 then prints the obtained
-        // permutation
+        //source : https://www.geeksforgeeks.org/heaps-algorithm-for-generating-permutations/
         if (size == 1)
             addToSet(elements, n);
 
         for (int i = 0; i < size; i++) {
             heapPermutation(elements, size - 1, n);
 
-            // if size is odd, swap first and last
-            // element
             if (size % 2 == 1) {
                 Object temp = elements[0];
                 elements[0] = elements[size - 1];
                 elements[size - 1] = temp;
             }
 
-            // If size is even, swap ith and last
-            // element
             else {
                 Object temp = elements[i];
                 elements[i] = elements[size - 1];
@@ -46,6 +61,14 @@ class AllPossibleSolutions {
         }
     }
 
+    /**
+     * Updates HashSet of all solutions removing all incorrect options.
+     * @param rightColours list of correct colours
+     * @param rightPositions array of correct postions - contains name of colour on correct postions
+     * @param wrongColours array of incorrect postions - contains name of colour on incorrect postions
+     * @param wrongPositions list of incorrect colours
+     * @param randomGuess array containing current incorrect guess
+     */
     public void update(List<Object> rightColours, Object[] rightPositions, Object[] wrongPositions, List<Object> wrongColours, Object[] randomGuess) {
 
         for (int i = 0; i < rightColours.size(); i++) {
@@ -75,6 +98,10 @@ class AllPossibleSolutions {
         solutions.removeIf((List<Object> o) -> o.equals(Arrays.asList(randomGuess)));
     }
 
+    /**
+     * Returns random solution from HashSet
+     * @return randomSolution
+     */
     public Object[] randomSolution() {
         return solutions.iterator().next().toArray();
     }
